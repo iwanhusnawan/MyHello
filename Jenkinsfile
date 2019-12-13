@@ -1,42 +1,31 @@
 pipeline {
          agent any
          stages {
-                 stage('One') {
+                 stage('1. Building code') {
                  steps {
-                     echo 'Hi, this is Iwan from Astralife'
+                     echo 'Building Code...'
                  }
                  }
-                 stage('Two') {
+                 stage('2. Unit Testing...') {
                  steps {
-                    input('Do you want to proceed?')
+                    echo 'Unit Testing...'
                  }
                  }
-                 stage('Three') {
-                 when {
-                       not {
-                            branch "master"
-                       }
-                 }
+                 stage('3. Integration Testing') {
                  steps {
-                       echo "Hello"
+                       echo "Integration Testing ..."
                  }
                  }
-                 stage('Four') {
+                 stage('4. Integration and Acceptance Testing ...') {
                  parallel { 
-                            stage('Unit Test') {
+                            stage('Integration Testing') {
                            steps {
-                                echo "Running the unit test..."
+                                echo "Running the Integration test..."
                            }
                            }
-                            stage('Integration test') {
-                              agent {
-                                    docker {
-                                            reuseNode true
-                                            image 'ubuntu'
-                                           }
-                                    }
+                            stage('5. Deployment Testing ...') {
                               steps {
-                                echo "Running the integration test..."
+                                echo "Deployment..."
                               }
                            }
                            }
